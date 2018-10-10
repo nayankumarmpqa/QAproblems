@@ -36,3 +36,59 @@ public class Syncho {
 	}
 
 }
+
+
+******************************Updated Code***************************************
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+public class Syncho {
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\gdang\\Desktop\\Drivers\\Firefox\\64 bit\\geckodriver.exe");
+		WebDriver drv = new FirefoxDriver();
+		//WebDriver drv = new ChromeDriver();
+		Actions a = new Actions(drv);
+		
+		drv.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		drv.get("https://www.alaskaair.com/");
+		drv.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        
+		drv.findElement(By.xpath("//a[@id='tab-hotels']")).click();
+		System.out.println("wait completed");
+		drv.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		drv.findElement(By.xpath("//input[@name='hotelOnlyToLocation']")).click();
+		drv.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		drv.findElement(By.xpath("//input[@name='hotelOnlyToLocation']")).sendKeys("nyc");
+		List<WebElement> list = drv.findElements(By.xpath(".//*[starts-with(@id,'li17_')]"));
+		System.out.println("Total selected rows are " + list.size());		
+		
+		Iterator<WebElement> iter = list.iterator();
+
+		// this will check whether list has some element or not
+			while (iter.hasNext()) 
+				{
+					// Iterate one by one
+					WebElement item = iter.next();
+
+					// get the text
+					String label = item.getText();
+
+					// print the text
+					System.out.println("Row label is - " + label);
+				}
+		System.out.println("Options i.e. '" +list.get(2).getText()+ "' is selected successfully.");
+		list.get(2).click();
+	}
+}
+
