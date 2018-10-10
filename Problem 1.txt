@@ -29,7 +29,7 @@ public class Syncho {
 		drv.findElement(By.xpath("//input[@name='hotelOnlyToLocation']")).sendKeys("nyc");
 		drv.findElement(By.xpath("//input[@name='hotelOnlyToLocation']")).sendKeys(Keys.DOWN);
 		System.out.println(drv.findElement(By.xpath("//input[@name='hotelOnlyToLocation']")).getText());
-		
+		// test line added by nayan2
 
 		
 
